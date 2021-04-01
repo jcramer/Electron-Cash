@@ -102,6 +102,14 @@ testnet4_block_explorers = {
 
 DEFAULT_EXPLORER_SCALENET = 'Loping.net'
 
+nextest_block_explorers = {
+    'NextChain.cash': ('https://explorer.nextchain.cash',
+                   Address.FMT_CASHADDR,
+                   {'tx': 'tx', 'addr': 'address', 'block': 'block-height'}),
+}
+
+DEFAULT_EXPLORER_NEXTEST = 'NextChain.cash'
+
 scalenet_block_explorers = {
     'Loping.net': ('https://sbch.loping.net',
                    Address.FMT_CASHADDR,
@@ -123,6 +131,8 @@ def BE_info():
         return testnet4_block_explorers
     elif networks.net is networks.ScaleNet:
         return scalenet_block_explorers
+    elif networks.net is networks.NexTest:
+        return nextest_block_explorers
     elif networks.net is networks.TaxCoinNet:
         return taxcoin_block_explorers
     return mainnet_block_explorers
@@ -140,6 +150,8 @@ def BE_default_explorer():
         return DEFAULT_EXPLORER_TESTNET4
     elif networks.net is networks.ScaleNet:
         return DEFAULT_EXPLORER_SCALENET
+    elif networks.net is networks.NexTest:
+        return DEFAULT_EXPLORER_NEXTEST
     elif networks.net is networks.TaxCoinNet:
         return DEFAULT_EXPLORER_TAXCOIN
     return DEFAULT_EXPLORER

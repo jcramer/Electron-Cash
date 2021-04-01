@@ -178,6 +178,34 @@ class ScaleNet(TestNet):
 
 
 
+class NexTest(TestNet):
+
+    CASHADDR_PREFIX = "nex"
+
+    GENESIS = "a73e8992af2a3b498c5114a6144b03bc41de938b39643fd82030f9721c0f8f1e"
+    TITLE = 'Electron Cash Nextest'
+    BASE_UNITS = {'sNEX': 8, 'msNEX': 5, 'sbits': 2}
+    DEFAULT_UNIT = "tNEX"
+
+
+    HEADERS_URL = "http://bitcoincash.com/files/nextest_headers"  # Unused
+
+    DEFAULT_SERVERS = _read_json_dict('servers_nextest.json')  # DO NOT MODIFY IN CLIENT CODE
+    DEFAULT_PORTS = {'t': '64001', 's': '64002'}
+
+    BITCOIN_CASH_FORK_BLOCK_HEIGHT = -1
+    BITCOIN_CASH_FORK_BLOCK_HASH = "0000000000000000000000000000000000000000000000000000000000000000"
+
+    # Nov 13. 2017 HF to CW144 DAA height (height of last block mined on old DAA)
+    CW144_HEIGHT = -1
+
+    VERIFICATION_BLOCK_MERKLE_ROOT = "0d42fc48a9d85bdcefcc6f0f00749279643b10c7f25786424dd01735ef3a7235"
+    VERIFICATION_BLOCK_HEIGHT = 0
+    asert_daa = ASERTDaa(is_testnet=True)
+    asert_daa.anchor = None  # Intentionally not specified because it's after checkpoint; blockchain.py will calculate
+
+
+
 class TaxCoinNet(AbstractNet):
     """ This is for supporting ABC tax coin. Use CLI arg --taxcoin to see this network.
     Users using this network cannot see BCH and vice-versa, due to the checkpoint block.
@@ -263,6 +291,10 @@ def set_scalenet():
     net = ScaleNet
     _set_units()
 
+def set_nextest():
+    global net
+    net = NexTest
+    _set_units()
 
 def set_taxcoin():
     global net

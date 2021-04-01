@@ -108,6 +108,9 @@ class SimpleConfig(PrintError):
         elif self.get('scalenet'):
             path = os.path.join(path, 'scalenet')
             make_dir(path)
+        elif self.get('nextest'):
+            path = os.path.join(path, 'nextest')
+            make_dir(path)
         elif self.get('taxcoin'):
             # taxcoin support + migrate settings over
             taxcoin_path = os.path.join(path, 'taxcoin')
